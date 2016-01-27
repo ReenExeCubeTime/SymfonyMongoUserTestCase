@@ -1,0 +1,5 @@
+api_auth:
+    path: /api/auth
+    defaults: { _controller: AppBundle:Api/AdminAuth:main }
+    requirements:
+        _method: POST
