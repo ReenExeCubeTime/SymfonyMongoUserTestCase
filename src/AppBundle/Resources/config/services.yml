@@ -1,0 +1,3 @@
+services:
+    em.user:
+        class: AppBundle\Service\UserService
