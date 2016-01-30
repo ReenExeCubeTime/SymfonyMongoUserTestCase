@@ -19,7 +19,7 @@ class AdminUserController extends Controller
 
         $form->submit($request);
 
-        $user->setRoles(['ROLE_USER']);
+        $user->setRoles(['ROLE_DEVELOPER']);
 
         $this->get('em.user')->add($user);
 
