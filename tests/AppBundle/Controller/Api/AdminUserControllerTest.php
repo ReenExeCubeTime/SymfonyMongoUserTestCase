@@ -12,7 +12,7 @@ class AdminUserControllerTest extends WebTestCase
 
         $client->request('PUT', '/api/admin/user', [
             'user' => [
-                'name' => 'Reen'
+                'username' => 'Reen'
             ]
         ]);
 
