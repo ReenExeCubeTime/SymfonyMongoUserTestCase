@@ -17,3 +17,4 @@
 build
 examples
 phpunit.phar
+composer.lock

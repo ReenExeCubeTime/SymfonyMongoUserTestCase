@@ -7,3 +7,5 @@ composer create-project symfony/framework-standard-edition app
 ```bash
 composer require doctrine/mongodb-odm doctrine/mongodb-odm-bundle
 ```
+
+[Getting Started With FOSUserBundle] (http://symfony.com/doc/current/bundles/FOSUserBundle/index.html)
