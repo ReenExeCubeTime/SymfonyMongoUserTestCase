@@ -8,7 +8,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 /**
  * @MongoDB\Document
  */
-class User extends BaseUser
+class User extends BaseUser implements \JsonSerializable
 {
     /**
      * @MongoDB\Id(strategy="auto")
@@ -34,4 +34,11 @@ class User extends BaseUser
      * @MongoDB\Collection
      */
     protected $roles;
+
+    public function jsonSerialize()
+    {
+        return [
+            'username' => $this->username
+        ];
+    }
 }

@@ -9,3 +9,10 @@ api_admin_user_add:
     defaults: { _controller: AppBundle:Api/AdminUser:add }
     requirements:
         _method: PUT
+
+api_admin_user:
+    path: /api/admin/user/{username}
+    defaults: { _controller: AppBundle:Api/AdminUser:get }
+    requirements:
+        username: \w+
+        _method: GET

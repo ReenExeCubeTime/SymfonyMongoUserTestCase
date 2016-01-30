@@ -25,4 +25,16 @@ class AdminUserController extends Controller
             'success' => true
         ]);
     }
+
+    public function getAction($username)
+    {
+        $user = $this->get('fos_user.user_manager')->findUserBy(['username' => $username]);
+
+        return new JsonResponse([
+            'success' => true,
+            'data' => [
+                'user' => $user
+            ]
+        ]);
+    }
 }

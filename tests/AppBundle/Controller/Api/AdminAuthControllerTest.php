@@ -5,10 +5,14 @@ namespace Tests\AppBundle\Controller\Api;
 use AppBundle\Document\User;
 use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
 use Doctrine\ODM\MongoDB\DocumentManager;
+use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AdminAuthControllerTest extends WebTestCase
 {
+    /**
+     * @var Client
+     */
     private $client;
 
     protected function setUp()
