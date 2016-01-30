@@ -12,7 +12,8 @@ class AdminUserControllerTest extends WebTestCase
 
         $client->request('PUT', '/api/admin/user', [
             'user' => [
-                'username' => 'Reen'
+                'username' => 'Reen',
+                'plain_password' => 'Execute',
             ]
         ]);
 

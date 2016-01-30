@@ -21,6 +21,11 @@ class User extends BaseUser
     protected $username;
 
     /**
+     * @MongoDB\String
+     */
+    protected $password;
+
+    /**
      * @MongoDB\Collection
      */
     protected $roles;
