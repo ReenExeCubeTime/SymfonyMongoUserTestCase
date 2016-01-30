@@ -3,3 +3,9 @@ api_auth:
     defaults: { _controller: AppBundle:Api/AdminAuth:main }
     requirements:
         _method: POST
+
+api_admin_user_add:
+    path: /api/admin/user
+    defaults: { _controller: AppBundle:Api/AdminUser:add }
+    requirements:
+        _method: PUT
