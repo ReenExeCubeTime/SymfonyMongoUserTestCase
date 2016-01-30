@@ -21,7 +21,7 @@ class AdminUserController extends Controller
 
         $user->setRoles(['ROLE_DEVELOPER']);
 
-        $this->get('em.user')->add($user);
+        $this->get('fos_user.user_manager')->updateUser($user);
 
         return new JsonResponse([
             'success' => true
