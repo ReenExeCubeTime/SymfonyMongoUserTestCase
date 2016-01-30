@@ -2,6 +2,9 @@
 
 namespace Tests\AppBundle\Controller\Api;
 
+use AppBundle\Document\User;
+use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
+use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AdminAuthControllerTest extends WebTestCase
@@ -12,8 +15,13 @@ class AdminAuthControllerTest extends WebTestCase
     {
         $this->client = static::createClient();
 
-        /* @var $dm ManagerRegistry */
-        $dm = static::$kernel->getContainer()->get('doctrine_mongodb');
+        /* @var $registry ManagerRegistry */
+        $registry = static::$kernel->getContainer()->get('doctrine_mongodb');
+
+        /* @var $manager DocumentManager */
+        $manager = $registry->getManager();
+
+        $manager->getDocumentDatabase(User::class)->drop();
     }
 
     public function testIndex()
