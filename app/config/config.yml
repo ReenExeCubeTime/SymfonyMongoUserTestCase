@@ -70,6 +70,11 @@ doctrine_mongodb:
         default:
             auto_mapping: true
 
+fos_user:
+    db_driver: mongodb
+    user_class: AppBundle\Document\User
+    firewall_name: main
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
