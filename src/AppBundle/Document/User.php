@@ -19,4 +19,9 @@ class User extends BaseUser
      * @MongoDB\String
      */
     protected $username;
+
+    /**
+     * @MongoDB\Collection
+     */
+    protected $roles;
 }

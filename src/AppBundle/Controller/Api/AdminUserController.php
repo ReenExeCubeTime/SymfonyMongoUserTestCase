@@ -13,11 +13,13 @@ class AdminUserController extends Controller
 {
     public function addAction(Request $request)
     {
-        $user = new User();
+        $user = $this->get('fos_user.user_manager')->createUser();
 
         $form = $this->createForm(new UserType(), $user);
 
         $form->submit($request);
+
+        $user->setRoles(['ROLE_USER']);
 
         $this->get('em.user')->add($user);
 
