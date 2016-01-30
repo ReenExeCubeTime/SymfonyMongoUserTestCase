@@ -118,6 +118,25 @@ class AdminUserControllerTest extends WebTestCase
         ];
     }
 
+    public function testUpdateValidate()
+    {
+        $this->client->request('POST', '/api/admin/user/Reen', [
+            'user' => [
+                'username' => 'E'
+            ]
+        ]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertResponse(
+            [
+                'success' => false,
+                'errors' => [
+                    'username' => 'This field must be at least 3 characters long'
+                ]
+            ]
+        );
+    }
+
     public function testUpdate()
     {
         $this->client->request('POST', '/api/admin/user/Reen', [

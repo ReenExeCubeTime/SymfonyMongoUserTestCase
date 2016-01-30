@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Api;
 
+use AppBundle\Document\User;
 use AppBundle\Type\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,24 +15,8 @@ class AdminUserController extends Controller
     {
         $user = $this->get('fos_user.user_manager')->createUser();
 
-        $form = $this->createForm(new UserType(), $user);
-
-        $form->submit($request);
-
-        $validator = $this->get('validator');
-        $errors = $validator->validate($user);
-
-        if ($errors->count()) {
-            /* @var $errors ConstraintViolationInterface[] */
-            $messages = [];
-            foreach ($errors as $error) {
-                $messages[$error->getPropertyPath()] = $error->getMessage();
-            }
-
-            return new JsonResponse([
-                'success' => false,
-                'errors' => $messages,
-            ]);
+        if ($response = $this->progress($request, $user)) {
+            return $response;
         }
 
         $user->setRoles(['ROLE_DEVELOPER']);
@@ -59,14 +44,39 @@ class AdminUserController extends Controller
     {
         $user = $this->get('fos_user.user_manager')->findUserByUsername($username);
 
-        $form = $this->createForm(new UserType(), $user);
-
-        $form->submit($request);
+        if ($response = $this->progress($request, $user)) {
+            return $response;
+        }
 
         $this->get('fos_user.user_manager')->updateUser($user);
 
         return new JsonResponse([
             'success' => true
         ]);
+    }
+
+    public function progress(Request $request, User $user)
+    {
+        $form = $this->createForm(new UserType(), $user);
+
+        $form->submit($request);
+
+        $validator = $this->get('validator');
+        $errors = $validator->validate($user);
+
+        if ($errors->count()) {
+            /* @var $errors ConstraintViolationInterface[] */
+            $messages = [];
+            foreach ($errors as $error) {
+                $messages[$error->getPropertyPath()] = $error->getMessage();
+            }
+
+            return new JsonResponse([
+                'success' => false,
+                'errors' => $messages,
+            ]);
+        }
+
+        return false;
     }
 }
