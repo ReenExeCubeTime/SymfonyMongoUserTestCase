@@ -34,21 +34,36 @@ class AdminUserControllerTest extends WebTestCase
         );
     }
 
-    public function testGet()
+    /**
+     * @dataProvider getDataProvider
+     * @param $username
+     * @param array $response
+     */
+    public function testGet($username, array $response)
     {
-        $this->client->request('GET', '/api/admin/user/Reen');
+        $this->client->request('GET', "/api/admin/user/$username");
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertResponse(
-            [
-                'success' => true,
-                'data' => [
-                    'user' => [
-                        'username' => 'Reen'
-                    ]
+            $response
+        );
+    }
+
+    public function getDataProvider()
+    {
+        $successResponse =             [
+            'success' => true,
+            'data' => [
+                'user' => [
+                    'username' => 'Reen'
                 ]
             ]
-        );
+        ];
+
+        yield [
+            'Reen',
+            $successResponse
+        ];
     }
 
     public function testUpdate()

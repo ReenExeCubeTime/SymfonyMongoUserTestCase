@@ -28,10 +28,10 @@ class AdminUserController extends Controller
 
     public function getAction($username)
     {
-        $user = $this->get('fos_user.user_manager')->findUserBy(['username' => $username]);
+        $user = $this->get('fos_user.user_manager')->findUserByUsername($username);
 
         return new JsonResponse([
-            'success' => true,
+            'success' => (bool)$user,
             'data' => [
                 'user' => $user
             ]
@@ -40,7 +40,7 @@ class AdminUserController extends Controller
 
     public function updateAction(Request $request, $username)
     {
-        $user = $this->get('fos_user.user_manager')->findUserBy(['username' => $username]);
+        $user = $this->get('fos_user.user_manager')->findUserByUsername($username);
 
         $form = $this->createForm(new UserType(), $user);
 

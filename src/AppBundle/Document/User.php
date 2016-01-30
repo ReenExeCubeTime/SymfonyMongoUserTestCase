@@ -23,6 +23,11 @@ class User extends BaseUser implements \JsonSerializable
     /**
      * @MongoDB\String
      */
+    protected $usernameCanonical;
+
+    /**
+     * @MongoDB\String
+     */
     protected $salt;
 
     /**
