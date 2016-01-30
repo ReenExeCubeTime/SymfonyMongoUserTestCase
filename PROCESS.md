@@ -2,3 +2,8 @@
 ```bash
 composer create-project symfony/framework-standard-edition app
 ```
+
+[DoctrineMongoDBBundle](http://symfony.com/doc/current/bundles/DoctrineMongoDBBundle/index.html)
+```bash
+composer require doctrine/mongodb-odm doctrine/mongodb-odm-bundle
+```
