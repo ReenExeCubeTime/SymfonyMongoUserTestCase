@@ -1,4 +1,7 @@
 AppBundle\Document\User:
     properties:
         username:
-            - NotBlank: { message: 'Need fill this field' }
+            - NotBlank: { message: 'This field is required' }
+            - Length:
+                min: 3
+                minMessage: 'This field must be at least {{ limit }} characters long'

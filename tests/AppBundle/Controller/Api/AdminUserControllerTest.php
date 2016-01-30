@@ -34,10 +34,17 @@ class AdminUserControllerTest extends WebTestCase
         );
     }
 
-    public function testAddValidation()
+    /**
+     * @dataProvider addValidationDataProvider
+     * @param $username
+     * @param $message
+     */
+    public function testAddValidation($username, $message)
     {
         $this->client->request('PUT', '/api/admin/user', [
-            'user' => []
+            'user' => [
+                'username' => $username
+            ]
         ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -45,10 +52,23 @@ class AdminUserControllerTest extends WebTestCase
             [
                 'success' => false,
                 'errors' => [
-                    'username' => 'Need fill this field'
+                    'username' => $message
                 ]
             ]
         );
+    }
+
+    public function addValidationDataProvider()
+    {
+        yield [
+            '',
+            'This field is required'
+        ];
+
+        yield [
+            'a',
+            'This field must be at least 3 characters long'
+        ];
     }
 
     /**
