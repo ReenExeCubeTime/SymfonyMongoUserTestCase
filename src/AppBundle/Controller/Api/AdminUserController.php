@@ -19,11 +19,7 @@ class AdminUserController extends Controller
 
         $form->submit($request);
 
-        /* @var $dm DocumentManager */
-        $dm = $this->get('doctrine_mongodb')->getManager();
-
-        $dm->persist($user);
-        $dm->flush();
+        $this->get('em.user')->add($user);
 
         return new JsonResponse([
             'success' => true

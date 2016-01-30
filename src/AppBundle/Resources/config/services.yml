@@ -1,3 +1,5 @@
 services:
     em.user:
         class: AppBundle\Service\UserService
+        arguments:
+            - '@doctrine_mongodb'
