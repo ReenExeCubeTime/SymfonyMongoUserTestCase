@@ -27,7 +27,11 @@ class AdminUserControllerTest extends WebTestCase
         ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        $this->assertSame($this->client->getResponse()->getContent(), '{"success":true}');
+        $this->assertResponse(
+            [
+                'success' => true,
+            ]
+        );
     }
 
     public function testGet()
@@ -35,8 +39,7 @@ class AdminUserControllerTest extends WebTestCase
         $this->client->request('GET', '/api/admin/user/Reen');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        $this->assertSame(
-            json_decode($this->client->getResponse()->getContent(), true),
+        $this->assertResponse(
             [
                 'success' => true,
                 'data' => [
@@ -45,6 +48,14 @@ class AdminUserControllerTest extends WebTestCase
                     ]
                 ]
             ]
+        );
+    }
+
+    private function assertResponse(array $expected)
+    {
+        $this->assertSame(
+            json_decode($this->client->getResponse()->getContent(), true),
+            $expected
         );
     }
 }
