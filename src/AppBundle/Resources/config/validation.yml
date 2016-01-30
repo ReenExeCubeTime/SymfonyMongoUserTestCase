@@ -1,0 +1,4 @@
+AppBundle\Document\User:
+    properties:
+        username:
+            - NotBlank: { message: 'Need fill this field' }

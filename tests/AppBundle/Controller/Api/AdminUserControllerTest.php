@@ -34,6 +34,23 @@ class AdminUserControllerTest extends WebTestCase
         );
     }
 
+    public function testAddValidation()
+    {
+        $this->client->request('PUT', '/api/admin/user', [
+            'user' => []
+        ]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertResponse(
+            [
+                'success' => false,
+                'errors' => [
+                    'username' => 'Need fill this field'
+                ]
+            ]
+        );
+    }
+
     /**
      * @dataProvider getDataProvider
      * @param $username

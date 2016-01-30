@@ -6,6 +6,7 @@ use AppBundle\Type\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\ConstraintViolationInterface;
 
 class AdminUserController extends Controller
 {
@@ -16,6 +17,22 @@ class AdminUserController extends Controller
         $form = $this->createForm(new UserType(), $user);
 
         $form->submit($request);
+
+        $validator = $this->get('validator');
+        $errors = $validator->validate($user);
+
+        if ($errors->count()) {
+            /* @var $errors ConstraintViolationInterface[] */
+            $messages = [];
+            foreach ($errors as $error) {
+                $messages[$error->getPropertyPath()] = $error->getMessage();
+            }
+
+            return new JsonResponse([
+                'success' => false,
+                'errors' => $messages,
+            ]);
+        }
 
         $user->setRoles(['ROLE_DEVELOPER']);
 
