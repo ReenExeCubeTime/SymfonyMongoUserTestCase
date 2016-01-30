@@ -51,7 +51,7 @@ class AdminUserControllerTest extends WebTestCase
 
     public function getDataProvider()
     {
-        $successResponse =             [
+        $successResponse = [
             'success' => true,
             'data' => [
                 'user' => [
@@ -63,6 +63,21 @@ class AdminUserControllerTest extends WebTestCase
         yield [
             'Reen',
             $successResponse
+        ];
+
+        yield [
+            'reen',
+            $successResponse
+        ];
+
+        yield [
+            'someAbsent',
+            [
+                'success' => false,
+                'data' => [
+                    'user' => null
+                ]
+            ]
         ];
     }
 
