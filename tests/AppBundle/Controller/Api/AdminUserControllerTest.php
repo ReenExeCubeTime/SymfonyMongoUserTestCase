@@ -10,7 +10,11 @@ class AdminUserControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('PUT', '/api/admin/user');
+        $client->request('PUT', '/api/admin/user', [
+            'user' => [
+                'name' => 'Reen'
+            ]
+        ]);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertSame($client->getResponse()->getContent(), '{"success":true}');
