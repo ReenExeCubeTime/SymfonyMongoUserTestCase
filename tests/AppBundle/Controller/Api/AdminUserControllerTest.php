@@ -51,6 +51,23 @@ class AdminUserControllerTest extends WebTestCase
         );
     }
 
+    public function testUpdate()
+    {
+        $this->client->request('POST', '/api/admin/user/Reen', [
+            'user' => [
+                'username' => 'ReenExe',
+                'plain_password' => 'Execute',
+            ]
+        ]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertResponse(
+            [
+                'success' => true,
+            ]
+        );
+    }
+
     private function assertResponse(array $expected)
     {
         $this->assertSame(
