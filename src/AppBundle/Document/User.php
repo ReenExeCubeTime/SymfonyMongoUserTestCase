@@ -23,6 +23,11 @@ class User extends BaseUser
     /**
      * @MongoDB\String
      */
+    protected $salt;
+
+    /**
+     * @MongoDB\String
+     */
     protected $password;
 
     /**
