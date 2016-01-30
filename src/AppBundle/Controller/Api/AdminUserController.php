@@ -37,4 +37,19 @@ class AdminUserController extends Controller
             ]
         ]);
     }
+
+    public function updateAction(Request $request, $username)
+    {
+        $user = $this->get('fos_user.user_manager')->findUserBy(['username' => $username]);
+
+        $form = $this->createForm(new UserType(), $user);
+
+        $form->submit($request);
+
+        $this->get('fos_user.user_manager')->updateUser($user);
+
+        return new JsonResponse([
+            'success' => true
+        ]);
+    }
 }
