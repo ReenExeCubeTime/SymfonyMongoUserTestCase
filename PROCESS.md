@@ -9,3 +9,4 @@ composer require doctrine/mongodb-odm doctrine/mongodb-odm-bundle
 ```
 
 [Getting Started With FOSUserBundle] (http://symfony.com/doc/current/bundles/FOSUserBundle/index.html)
+[PuPHPet] (https://puphpet.com/)
