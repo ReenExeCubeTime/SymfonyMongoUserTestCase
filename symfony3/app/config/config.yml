@@ -68,7 +68,12 @@ doctrine_mongodb:
     default_database: em
     document_managers:
         default:
-            auto_mapping: true
+            auto_mapping:
+
+fos_user:
+    db_driver: mongodb
+    user_class: AppBundle\Document\User
+    firewall_name: main
 
 # Swiftmailer Configuration
 swiftmailer:
