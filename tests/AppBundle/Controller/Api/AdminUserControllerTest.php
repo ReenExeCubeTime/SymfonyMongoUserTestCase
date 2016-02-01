@@ -15,6 +15,11 @@ class AdminUserControllerTest extends WebTestCase
     protected function setUp()
     {
         $this->client = static::createClient();
+
+        $this->client->request('POST', '/api/login', [
+            'username' => 'admin',
+            'password' => 'empty',
+        ]);
     }
 
     public function testAdd()
