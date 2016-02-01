@@ -2,23 +2,23 @@
 
 namespace Tests\AppBundle\Controller\Api;
 
-use Symfony\Bundle\FrameworkBundle\Client;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
-class AdminUserControllerTest extends WebTestCase
+class AdminUserControllerTest extends ApiAbstractControllerTest
 {
-    /**
-     * @var Client
-     */
-    private $client;
-
-    protected function setUp()
+    public function testAnonymous()
     {
-        $this->client = static::createClient();
+        $this->client->request('PUT', '/api/admin/user', [
+            'user' => [
+                'username' => 'Reen',
+                'plain_password' => 'Execute',
+            ]
+        ]);
+
+        $this->assertEquals(500, $this->client->getResponse()->getStatusCode());
     }
 
     public function testAdd()
     {
+        $this->login();
         $this->client->request('PUT', '/api/admin/user', [
             'user' => [
                 'username' => 'Reen',
@@ -41,6 +41,7 @@ class AdminUserControllerTest extends WebTestCase
      */
     public function testAddValidation($username, $message)
     {
+        $this->login();
         $this->client->request('PUT', '/api/admin/user', [
             'user' => [
                 'username' => $username
@@ -78,6 +79,7 @@ class AdminUserControllerTest extends WebTestCase
      */
     public function testGet($username, array $response)
     {
+        $this->login();
         $this->client->request('GET', "/api/admin/user/$username");
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -120,6 +122,7 @@ class AdminUserControllerTest extends WebTestCase
 
     public function testUpdateValidate()
     {
+        $this->login();
         $this->client->request('POST', '/api/admin/user/Reen', [
             'user' => [
                 'username' => 'E'
@@ -139,6 +142,7 @@ class AdminUserControllerTest extends WebTestCase
 
     public function testUpdate()
     {
+        $this->login();
         $this->client->request('POST', '/api/admin/user/Reen', [
             'user' => [
                 'username' => 'ReenExe',
@@ -154,11 +158,11 @@ class AdminUserControllerTest extends WebTestCase
         );
     }
 
-    private function assertResponse(array $expected)
+    private function login()
     {
-        $this->assertSame(
-            json_decode($this->client->getResponse()->getContent(), true),
-            $expected
-        );
+        $this->client->request('POST', '/api/login', [
+            'username' => 'admin',
+            'password' => 'empty',
+        ]);
     }
 }
