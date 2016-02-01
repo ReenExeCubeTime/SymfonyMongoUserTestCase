@@ -13,7 +13,7 @@ class AdminUserControllerTest extends ApiAbstractControllerTest
             ]
         ]);
 
-        $this->assertEquals(500, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode());
     }
 
     public function testAdd()
