@@ -57,7 +57,10 @@ class AdminUserController extends Controller
 
     public function progress(Request $request, User $user)
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user, [
+            'method' => $request->getMethod(),
+            'csrf_protection' => false,
+        ]);
         $form->handleRequest($request);
 
         $validator = $this->get('validator');
