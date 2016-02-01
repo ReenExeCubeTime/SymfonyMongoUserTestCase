@@ -7,19 +7,18 @@ api_auth:
 api_admin_user_add:
     path: /api/admin/user
     defaults: { _controller: AppBundle:Api/AdminUser:add }
-    requirements:
-        _method: PUT
+    methods: [PUT]
 
 api_admin_user_update:
     path: /api/admin/user/{username}
     defaults: { _controller: AppBundle:Api/AdminUser:update }
+    methods: [POST]
     requirements:
         username: \w+
-        _method: POST
 
 api_admin_user:
     path: /api/admin/user/{username}
     defaults: { _controller: AppBundle:Api/AdminUser:get }
+    methods: [GET]
     requirements:
         username: \w+
-        _method: GET
