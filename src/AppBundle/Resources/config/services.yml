@@ -3,3 +3,6 @@ services:
         class: AppBundle\Service\UserService
         arguments:
             - '@doctrine_mongodb'
+
+    fos_user.doctrine_registry:
+        alias: doctrine_mongodb
