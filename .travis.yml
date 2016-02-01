@@ -7,6 +7,7 @@ env:
   - MONGO_VERSION=1.5.8 PREFER_LOWEST=""
 
 before_script:
+    - echo session.gc_probability = 0 >> $INI_FILE
     - yes '' | pecl -q install -f mongo-${MONGO_VERSION}
     - php --ri mongo
     - composer self-update
