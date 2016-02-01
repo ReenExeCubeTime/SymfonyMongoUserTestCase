@@ -2,21 +2,8 @@
 
 namespace Tests\AppBundle\Controller\Api;
 
-use Symfony\Bundle\FrameworkBundle\Client;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
-class AdminUserControllerTest extends WebTestCase
+class AdminUserControllerTest extends ApiAbstractControllerTest
 {
-    /**
-     * @var Client
-     */
-    private $client;
-
-    protected function setUp()
-    {
-        $this->client = static::createClient();
-    }
-
     public function testAnonymous()
     {
         $this->client->request('PUT', '/api/admin/user', [
@@ -168,14 +155,6 @@ class AdminUserControllerTest extends WebTestCase
             [
                 'success' => true,
             ]
-        );
-    }
-
-    private function assertResponse(array $expected)
-    {
-        $this->assertSame(
-            json_decode($this->client->getResponse()->getContent(), true),
-            $expected
         );
     }
 
