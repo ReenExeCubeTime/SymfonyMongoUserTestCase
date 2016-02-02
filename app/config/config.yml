@@ -47,7 +47,7 @@ services:
         arguments: ['mongodb://localhost:27017']
     session.handler.mongo:
         class: Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler
-        arguments: ['@mongo_client', '%mongo.session.options%']
+        arguments: ['@mongo_client', "%mongo_session_options%"]
 
 fos_user:
     db_driver: mongodb

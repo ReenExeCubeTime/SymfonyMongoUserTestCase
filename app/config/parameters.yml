@@ -2,6 +2,6 @@
 parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
 
-    mongo.session.options:
+    mongo_session_options:
         database: session_db
         collection: session
