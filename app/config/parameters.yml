@@ -1,7 +1,3 @@
 # This file is auto-generated during the composer install
 parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
-
-    mongo_session_options:
-        database: session_db
-        collection: session
