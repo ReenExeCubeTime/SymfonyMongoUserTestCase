@@ -10,3 +10,7 @@ parameters:
     mailer_user: null
     mailer_password: null
     secret: ThisTokenIsNotSoSecretChangeIt
+
+    mongo.session.options:
+        database: session_db
+        collection: session
